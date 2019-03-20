@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>xiaowosha</title>
+  <title>Xiaowosha</title>
   
   <subtitle>Happy in bioinformatics and life</subtitle>
   <link href="/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>http://418704194.github.com/</id>
   
   <author>
-    <name>xiaowosha</name>
+    <name>Xiaowosha</name>
     
   </author>
   
@@ -20,7 +20,7 @@
     <title>FirstPages</title>
     <link href="http://418704194.github.com/2019/03/04/FirstPages/"/>
     <id>http://418704194.github.com/2019/03/04/FirstPages/</id>
-    <published>2019-03-04T03:03:46.000Z</published>
+    <published>2019-03-04T04:03:46.000Z</published>
     <updated>2019-03-04T04:04:50.720Z</updated>
     
     <summary type="html">
