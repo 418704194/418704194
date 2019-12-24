@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://418704194.github.com/"/>
-  <updated>2019-03-20T13:56:22.121Z</updated>
+  <updated>2019-12-24T11:53:02.050Z</updated>
   <id>http://418704194.github.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>&#39;abrt-cli status&#39; timed out</title>
+    <link href="http://418704194.github.com/2019/12/24/abrt-cli-status-timed-out/"/>
+    <id>http://418704194.github.com/2019/12/24/abrt-cli-status-timed-out/</id>
+    <published>2019-12-24T09:14:12.000Z</published>
+    <updated>2019-12-24T11:53:02.050Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="‘abrt-cli-status’-timed-out"><a href="#‘abrt-cli-status’-timed-out" class="headerlink" title="‘abrt-cli status’ timed out"></a>‘abrt-cli status’ timed out</h1><p><strong>Warning : Poor English!</strong></p><p>Recently logged into the server was very slow and always shown this error information: <code>&#39;abrt-cli status&#39; timed out</code>.</p><p>First, I insert some <code>echo</code> flag in <code>/etc/profile</code> as:<br><img src="/2019/12/24/abrt-cli-status-timed-out/Debug1.png" alt="Debug1"> </p><p>Re-login and get these information:<br><img src="/2019/12/24/abrt-cli-status-timed-out/Infor2.png" alt="Infor2"> </p><p>So, I found the source of these problems is <code>/etc/profile.d/abrt-console-notification.sh</code>. Open this file, and found code snippet:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timeout 10s abrt-cli status --since=<span class="string">"<span class="variable">$SINCE</span>"</span> 2&gt;<span class="string">"<span class="variable">$ABRT_DEBUG_LOG</span>"</span> || <span class="built_in">echo</span> <span class="string">"'abrt-cli status' timed out"</span></span><br></pre></td></tr></table></figure></p><p>so I add <code>echo abrt-cli status --since=&quot;$SINCE&quot;</code> in <code>/etc/profile.d/abrt-console-notification.sh</code></p><p>Re-login and get these information:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Last login: Tue Dec 24 16:52:25 2019 from 10.0.0.10</span><br><span class="line">abrt-cli status --since=1577177555 </span><br><span class="line"><span class="string">'abrt-cli status'</span> timed out</span><br></pre></td></tr></table></figure></p><p>so I type <code>abrt-cli status --since=1577177555</code> in terminal, and return these lines:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Private Reports is enabled, use <span class="string">'abrt-cli -a COMMAND'</span> to get the detected problems.</span><br><span class="line">Can<span class="string">'t get problem list from abrt-dbus: Timeout was reached</span></span><br></pre></td></tr></table></figure></p><p>We can find the problem came from <code>abrt-dbus</code>. Stop this program maybe solve it:</p><ul><li>Method 1. use <code>ps aux | grep abrt-dbus</code> to get the PID of <code>abrt-dbus</code>, and <code>kill -9 $PID</code></li><li>Method 2. <code>killall abrt-dbus</code></li></ul><p>Re-login server, I found this problem was solved.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;‘abrt-cli-status’-timed-out&quot;&gt;&lt;a href=&quot;#‘abrt-cli-status’-timed-out&quot; class=&quot;headerlink&quot; title=&quot;‘abrt-cli status’ timed out&quot;&gt;&lt;/a&gt;‘abrt
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://418704194.github.com/categories/Linux/"/>
+    
+    
+      <category term="CentOS" scheme="http://418704194.github.com/tags/CentOS/"/>
+    
+      <category term="CentOS-7" scheme="http://418704194.github.com/tags/CentOS-7/"/>
+    
+      <category term="Troubleshooting" scheme="http://418704194.github.com/tags/Troubleshooting/"/>
+    
+  </entry>
   
   <entry>
     <title>ComputerCluster</title>

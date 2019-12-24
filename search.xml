@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA['abrt-cli status' timed out]]></title>
+    <url>%2F2019%2F12%2F24%2Fabrt-cli-status-timed-out%2F</url>
+    <content type="text"><![CDATA[‘abrt-cli status’ timed outWarning : Poor English! Recently logged into the server was very slow and always shown this error information: &#39;abrt-cli status&#39; timed out. First, I insert some echo flag in /etc/profile as: Re-login and get these information: So, I found the source of these problems is /etc/profile.d/abrt-console-notification.sh. Open this file, and found code snippet:1timeout 10s abrt-cli status --since="$SINCE" 2&gt;"$ABRT_DEBUG_LOG" || echo "'abrt-cli status' timed out" so I add echo abrt-cli status --since=&quot;$SINCE&quot; in /etc/profile.d/abrt-console-notification.sh Re-login and get these information:123Last login: Tue Dec 24 16:52:25 2019 from 10.0.0.10abrt-cli status --since=1577177555 'abrt-cli status' timed out so I type abrt-cli status --since=1577177555 in terminal, and return these lines:12Private Reports is enabled, use 'abrt-cli -a COMMAND' to get the detected problems.Can't get problem list from abrt-dbus: Timeout was reached We can find the problem came from abrt-dbus. Stop this program maybe solve it: Method 1. use ps aux | grep abrt-dbus to get the PID of abrt-dbus, and kill -9 $PID Method 2. killall abrt-dbus Re-login server, I found this problem was solved.]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>CentOS</tag>
+        <tag>CentOS-7</tag>
+        <tag>Troubleshooting</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ComputerCluster]]></title>
     <url>%2F2019%2F03%2F20%2FComputerCluster%2F</url>
     <content type="text"></content>
